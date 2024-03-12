@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect, useRef} from "react";
 import clsx from "clsx";
 import { useLocation, useParams, NavLink, Link, Routes, Route } from "react-router-dom"; 
 import { toast } from "react-toastify";
@@ -13,7 +13,7 @@ export default function MoviesDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
   const location = useLocation();
-  const backLinkRef = location.state?.from ?? "/movies";
+  const backLinkRef = useRef(location.state?.from ?? "/movies");
 
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function MoviesDetailsPage() {
 
   return (
     <section className={css.section}>
-      <Link to={backLinkRef}>Go back</Link>
+      <Link to={backLinkRef.current}>Go back</Link>
 
       <div className={css.filmContainer}>
         <img
