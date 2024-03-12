@@ -3,8 +3,10 @@ import { toast } from "react-toastify";
 import { getMovieCast } from "../../movies-api";
 import css from './MovieCast.module.css'
 import noImage from "../images/notFound.jpg";
+import { useParams } from "react-router-dom";
 
-export default function MovieCast ({ movieId }) {
+export default function MovieCast () {
+  const { movieId } = useParams();
   const [cast, setCast] = useState(null);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect} from "react";
 import clsx from "clsx";
 import { useLocation, useParams, NavLink, Link, Routes, Route } from "react-router-dom"; 
 import { toast } from "react-toastify";
@@ -9,9 +9,11 @@ import MovieCast from "../../components/MovieCast/MovieCast";
 import MovieReviews from "../../components/MovieReviews/MovieReviews";
 
 export default function MoviesDetailsPage() {
-  const location = useLocation();
+  
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
+  const location = useLocation();
+  const backLinkRef = location.state?.from  ?? "/movies";
 
   useEffect(() => {
     getMovieById(movieId)
@@ -23,7 +25,6 @@ export default function MoviesDetailsPage() {
       );
   }, [movieId]);
 
-  const onGoBack = useRef(location.state ?? "/");
 
   const { poster_path, title, genres, vote_average, overview } = movie;
 
@@ -34,7 +35,8 @@ export default function MoviesDetailsPage() {
 
   return (
     <section className={css.section}>
-      <Link to={onGoBack.current}>Go back</Link>
+      <Link to={backLinkRef}>Go back</Link>
+
       <div className={css.filmContainer}>
         <img
           src={
