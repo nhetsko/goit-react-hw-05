@@ -13,7 +13,8 @@ export default function MoviesDetailsPage() {
   const { movieId } = useParams();
   const [movie, setMovie] = useState([]);
   const location = useLocation();
-  const backLinkRef = location.state?.from  ?? "/movies";
+  const backLinkRef = location.state?.from ?? "/movies";
+
 
   useEffect(() => {
     getMovieById(movieId)

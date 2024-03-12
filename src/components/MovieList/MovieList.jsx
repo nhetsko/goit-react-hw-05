@@ -1,19 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import css from './MovieList.module.css';
 import noImage from '../images/notFound.jpg';
 
-const MovieList = ({ movies, location }) => {
+
+
+const MovieList = ({ movies }) => {
+  const location = useLocation();
   return (
     <ul className={css.filmList}>
       {movies.map(({ id, poster_path, title }) => (
         <li key={id} className={css.filmItem}>
-          <Link
-  to={{
-    pathname: `/movies/${id}`,
-    state: { from: location },
-  }}
->
+          <Link state={{ from: location }} to={`/movies/${id}`}>
             <img
               src={
                 poster_path
